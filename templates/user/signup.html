@@ -1,0 +1,62 @@
+{% include 'headers.html' %}
+    <body>
+        <div class="topnav">
+            <a href="/"><b>HOME</b></a>
+            <a href="/"><b>SIGNUP</b></a>
+        </div>
+        
+        <div class="container" >
+            <div class="row" >
+                <div class="card">
+                    <div>
+                        <div class="card-header">
+                            <h1><b>WELCOME TO USER SIGNUP PAGE</b></h1>
+                        </div>
+                        {% for message in get_flashed_messages() %}
+                        {{ message }}
+                        {% endfor %}
+                        <form action="{{url_for('signup')}}" method="post">
+                            <div class="form-group">
+                                <label class="form-control-label">First name</label>
+                                <input type="text" placeholder="first name" name="first_name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Last name</label>
+                                <input type="text"  placeholder="last name" name="last_name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Username</label>
+                                <input type="text" placeholder="usename" name="username" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Password</label>
+                                <input type="password" placeholder="password" name="password" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Repeat Password</label>
+                                <input type="password" placeholder="repeat password" name="repeat_password" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Email</label>
+                                <input type="email" placeholder="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Gender</label>
+                                <select class="form-control" name="gender" id="">
+                                    <option value="gender"selected >select gender</option>
+                                    <option value="female" name="female" >female</option>
+                                    <option value="male" name="male">male</option>
+                                </select>                                
+                            </div>                                        
+                            
+                            <button class="btn btn-primary btn-block" type="submit" value="submit" >submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+               
+
+    </body>
+</html>

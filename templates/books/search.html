@@ -1,0 +1,78 @@
+{% include 'headers.html'  %}
+<body>
+    <div class="col-md-5 mx-auto text-center ">
+        <h1>VIEW AVAILABLE BOOKS</h1>
+    </div>
+    <section class="searchBookForm my-3 py-4 bg-light">
+        <div class="container">
+            <form action="{{url_for('searchedbook')}}" method="POST">
+                <div class="row">
+                    <div class="col-md-5 p-1">
+                        <select class="form-control" name ="search" id="search">
+                            <option  value="None" name="filter by" selected>filter by</option>
+                            <option value="title" name ="title">title</option>
+                            <option value="author" name="author">author</option>
+                            <option value="isbn" name="isbn">isbn</option>
+                        </select>
+                    </div>
+
+                        <div class="col-md-5 p-1">
+                            <input type="text" class="form-control" name="searchbook" placeholder="searchbook">
+                        </div>
+                        <div class="col-md-2 p-1">
+                            <input type="submit" class="btn btn-primary btn-block" name="submit" value="submit">
+                        </div>
+                    
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="viewBooksForm">
+
+        <div class="text-center">
+            {% for message in get_flashed_messages() %}
+            {{message}}
+            {% endfor %}
+        </div>
+
+            <div class="row mt-3">
+
+                
+                {% for book in books %}
+                <div class="card-body col-md-3 text-center" >
+                    <h2 class="card-title">{{book.title}}</h2>
+                    <p class="text-muted" >
+                        <small class="text-muted">author: {{book.author}}</small>
+                    </p>
+                    
+                    <p class="text-muted" >
+                        <small class="text-muted">isbn: {{book.isbn}}</small>
+                    </p>
+                    <p class="text-muted" >
+                        <small class="text-muted">quantity: {{book.quantity}}</small>
+                    </p>
+                    {% for item in borrower %}
+                    {%if item.book_id == book.book_id and user==item.username %}
+                    <form action="{{url_for('returnbook',book_id=book.book_id,username=user)}}" method="post">
+                        <button class="bn btn-primary btn-block" type="submit" value="submt">return</button>
+                    </form>
+                    
+                    {% endif %}
+                    
+                    {% endfor %}
+                    <form action="{{url_for('borrows',book_id=book.book_id,username=user)}}" method="post">
+                        <!-- <input type="text" name="isbn" value="{{book.isbn}}" hidden>
+                        <input type="text" name="username" value="" hidden> -->
+                        <button class="bn btn-primary btn-block" type="submit" value="submt">borrow</button>
+                    </form>
+                    
+                    
+                    
+                </div>
+                
+                {%endfor%}
+                
+            </div>
+        </div>
+    </section>
+</body>

@@ -1,0 +1,129 @@
+{% include 'headers.html' %}
+    <head>
+        <title>
+    
+        </title>
+    </head>
+    <body>
+{% include 'user/usernav.html' %}
+        <section id="action" class="py-4 mb-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="{{url_for('ulogins')}}" data-toggle="" data-target=""  class="btn btn-light btn-block text-white"><i class="fa fa-arrow-left"></i>Back to Dashboard</a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="" data-toggle="modal" data-target="#changeProfileModal"  class="btn btn-warning btn-block"><i class="fa fa-user"></i>update profile</a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="" data-toggle="modal" data-target="#changePasswordModal" class="btn btn-primary btn-block"><i class="fa fa-key"></i>change password</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="col-md-3 mx-auto">
+        {% for message in get_flashed_messages() %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    <section class="mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="/public/img/{{profile.image}}" alt="profile.png" class="card-image-top rounded-circle p-1" >
+                    <a href="" class="text-muted ml-5" data-toggle="modal" data-target="#changePhotoModal"><i class="fa fa-camera"></i>change photo</a>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="pb-3 text-center">USER PERSONAL INFORMATION</h3>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Name: {{profile.first_name}} {{profile.last_name}}</li>
+                            <li class="list-group-item">Username: {{profile.username}}</li>
+                            <li class="list-group-item">Email: {{profile.email}}</li>
+                            <li class="list-group-item">Gender: {{profile.gender}}</li>                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+                
+    </section>
+                <!-- change photo modal -->
+        <div class="modal fade" id="changePhotoModal">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                  <h5 class="modal-title" id="photoModalLabel">Change Photo</h5>
+                  <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <form action="{{url_for('upload_folder')}}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label for="photo" class="form-control-label">Change Photo</label>
+                      <input type="file" id="image" name="file" class="form-control">
+                    </div>
+                    <input type="submit" class="btn btn-sm btn-primary m-2" value="Submit">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!-- change profile modal -->
+        <div class="modal fade" id="changeProfileModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title" id="profileModalLabel">Change profilemodal</h5>
+                        <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{url_for('updateprofile')}}", method="POST">
+                            <div class="form-group">
+                                <label for="first_name" class="form-control-label">First name</label>
+                                <input type="text" class="form-control" name="first_name" value="{{profile.first_name}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name" class="form-control-label">Last name</label>
+                                <input type="text" class="form-control" name="last_name" value="{{profile.last_name}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-control-label">email</label>
+                                <input type="email" class="form-control" name="email" value="{{profile.email}}">
+                            </div>
+                            <button class="btn btn-warning btn-block" id="submit">submit</button>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- change password modal -->
+        <div class="modal fade" id="changePasswordModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="title" id="passwordModalLabel" >change password</h5>
+                        <button class="close" data-dismiss="modal"><span>&CircleTimes;</span></button>                            
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{url_for('changepassword')}}" method="post">
+                            <div class="form-group">
+                                <label for="old_passowrd" class="form-control-label">old password</label>
+                                <input type="password" class="form-control" name="old_password" placeholder="old password" >
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="form-control-label">new password</label>
+                                <input type="password" class="form-control" name="new_password" placeholder="new password" >
+                            </div>
+                            <div class="form-group">
+                                <label for="repeat_password" class="form-control-label">repeat password</label>
+                                <input type="password" class="form-control" name="repeat_password" placeholder="repeat password" >
+                            </div>
+                            <input type="submit" class="btn btn-primary btn-block"></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% include 'footer.html' %}    

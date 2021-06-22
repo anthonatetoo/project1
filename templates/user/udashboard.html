@@ -1,0 +1,103 @@
+{% include 'headers.html' %}
+<body>
+
+    {% include 'user/usernav.html' %}
+    <header id="main-header" class="py-2 bg-primary text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1><i class="fa fa-cog"></i>Dashboard</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="mt-4" id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                           
+                                <img  src="/public/img/{{profile.image}}" alt="profile.png" class="card-image-top rounded-circle p-1"/>
+                               
+                            
+                            
+                            <p>user: {{profile.first_name}} {{profile.last_name}}</p>
+                            <p> username: {{profile.username}}</p>
+                            <p> email: {{profile.email}} </p>
+                            <p> gender: {{profile.gender}}</p>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- displays user -->
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            ALL USER ACTIVITIES
+                        </div>
+                        <table class="table table-stripped">
+                            <thead class="table-inverse">
+                                <tr>
+                                    <th>info</th>
+                                    <th>category</th>
+                                    <th>date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for activity in activities %}
+                                <tr>
+                                    {% if activity.category=='Upload Photo' %}
+                                    <td>You recently <span class="text-primary">uploadeds a new profile photo</span> </td>
+                                    <td>{{activity.category}}</td>
+                                    <td>{{activity.date}}</td>
+                                    {% elif activity.category=='Change Password' %}
+                                    <td>You recently <span class="text-danger">changed your password</span></td>
+                                    <td>{{activity.category}}</td>
+                                    <td>{{activity.date}}</td>
+                                    {% elif activity.category=='Borrow Book' %}
+                                    <td>You recently <span class="text-primary">borrowed a book </span></td>
+                                    <td>{{activity.category}}</td>
+                                    <td>{{activity.date}}</td>
+                                    {% elif activity.category=='Return Book' %}
+                                    <td>You recently <span class="text-primary">returned a book</span></td>
+                                    <td>{{activity.category}}</td>
+                                    <td>{{activity.date}}</td>
+                                    {% elif activity.category=='Update Profile' %}
+                                    <td>You recently <span class="text-warning">updated your profile</span></td>
+                                    <td>{{activity.category}}</td>
+                                    <td>{{activity.date}}</td>
+                                    {% endif %}
+                                </tr>
+                                
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- {% if pages >0 %}
+                        <nav class="ml-3 mb-2">
+                            <ul class="pigination offset-md-3"></ul>
+                            {% if current==1 %}
+                            <li class="page-item disabled "><a class="page-link">First</a></li>
+                            {% else %}
+                            <li class="page-item"><a href="" class="page-link">First</a></li>
+                            {% endif %}
+                            {% for i=(Number(current)>5 ? Number(current)-4:%}
+                            {% if i !=1 %}
+                            <li class="page-item disabled"><a class="page-link">...</a></li>
+                            {% endfor %}
+
+ -->
+
+                     
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    {% include 'footer.html' %}
+
+     
+</body>

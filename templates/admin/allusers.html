@@ -1,0 +1,36 @@
+{% include 'headers.html' %}
+<body>
+    <section class="viewUsersForm">
+        <div class="text-center">
+            {% for message in get_flashed_messages() %}
+            {{ message }}
+            {% endfor %}
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card-header">
+                        <h1>AVAILABLE USERS</h1>                        
+                    </div>
+                    <table class="table table-striped">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>username</th>
+                                <th>email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{user.username}}</td>
+                                <td>{{user.email}}</td>
+                            </tr>                            
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section> 
+</body>
+</html>

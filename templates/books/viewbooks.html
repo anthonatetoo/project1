@@ -1,0 +1,52 @@
+{% include 'headers.html' %}
+<body>
+    <section id="search_bar" class="my-3 py-4 bg-light">
+        <div class="container">
+         <form action="{{url_for('searchedbook')}}" method="post">
+          <div class="row">
+              <div class="col-md-5 p-1">
+                <select name="filter" class="form-control" required>
+                  <option selected name="select filter...">Select Filter...</option>
+                  <option value="title" name="title">Title</option>
+                  <option value="author" name="author">Author</option>
+                  <option value="ISBN" name="ISBN">ISBN</option>
+                </select>
+              </div>
+      
+               <div class="col-md-5 p-1">
+                <input name="search"  type="text" class="form-control" placeholder="Search Books">
+              </div>
+      
+               <div class="col-md-2 p-1">
+                <input type="submit" class="btn btn-outline-primary btn-block" value="Search">
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    <section class="viewBooksForm">
+        <div class="card-header text-center offset-md-0">
+            <h1>VIEW AVAILABLE BOOKS</h1>
+        </div>
+        {% for message in get_flashed_messsages %}
+        {{ message }}
+        {% endfor %}
+        <div class="row mt-3"> 
+            {% for book in books %}
+            <div class="card-body col-md-3 text-center">
+                <h2 class="card-title">{{book.title}}</h2>
+                <p class="text-muted">
+                    <small class="text-muted">author: {{book.author}}</small>
+                </p>
+                <p class="text-muted">
+                    <small class="text-muted">ISBN: {{book.isbn}}</small>
+                </p>
+                <form action="",method="post">
+                    <button class="btn btn-warning" name="ISBN" id="ISBN" value="{{book.ISBN}}" type="borrow">borrow</button>
+                </form>
+            </div>
+            {% endfor %}
+
+        </div>
+    </section>
+</body>
